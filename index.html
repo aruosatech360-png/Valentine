@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>For You ❤️</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="src/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gradient-to-b from-pink-50 to-white text-gray-800">
+<div id="loader">
+  <video id="loader-video" poster="Image.jpg" autoplay muted playsinline preload="auto">
+    <source src="Pixel heart animation.mp4" type="video/mp4">
+    <!-- fallback: simple spinning heart (SVG) and an image if video can't play -->
+    <svg id="loader-heart" viewBox="0 0 32 29.6" width="120" height="120" aria-hidden="true">
+      <path fill="#ef4444" d="M23.6,0C20.4,0,18,2.2,16,4.1C14,2.2,11.6,0,8.4,0C3.7,0,0,3.8,0,8.5c0,9.4,16,17.8,16,17.8s16-8.4,16-17.8 C32,3.8,28.3,0,23.6,0z"/>
+    </svg>
+  </video>
+  <img id="loader-fallback" src="Image.jpg" alt="loading heart" style="display:none;width:220px;height:auto;border:6px solid #000;border-radius:6px;box-shadow:8px 8px 0 rgba(0,0,0,0.6);"/>
+</div>
+
+
+<!-- Hero Section -->
+<section id="hero" class="h-screen flex flex-col items-center justify-center text-center px-6">
+  <div id="prompt" class="relative w-full max-w-3xl mx-auto py-8">
+    <h1 class="text-4xl md:text-6xl font-extrabold text-pink-600 mb-6">Will you be my Valentine? ❤️</h1>
+
+    <p class="mb-6 text-lg md:text-xl text-gray-700">Pick one — but I think you already know the answer…</p>
+
+    <div id="buttons" class="relative h-40 flex items-center justify-center">
+      <button id="yesBtn" class="px-8 py-3 bg-pink-600 text-white rounded-full shadow-lg hover:brightness-110 transition">Yes</button>
+
+      <button id="noBtn" class="px-6 py-3 bg-gray-200 text-gray-800 rounded-full shadow-lg ml-6" style="transition: left 0.15s, top 0.15s;">No</button>
+    </div>
+
+    <p class="mt-6 text-sm text-gray-500">(Try to click "No" if you dare 😉)</p>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-white/80 text-center py-6 text-sm text-gray-600">
+  From your Valentine 💌
+</footer>
+<canvas id="confetti-canvas" style="position:fixed;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:60;display:none;"></canvas>
+<div id="celebration" style="position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:70;background:rgba(0,0,0,0.3);">
+  <div style="background:linear-gradient(180deg,rgba(255,250,250,0.99),rgba(255,240,245,0.95));padding:64px 52px;border:6px solid #000;border-radius:4px;box-shadow:12px 12px 0 rgba(0,0,0,0.6);text-align:center;max-width:480px;">
+    <h2 style="font-size:2.5rem;color:#e11d48;margin:0 0 32px 0;font-family:'Press Start 2P',system-ui;text-shadow:3px 3px 0 rgba(0,0,0,0.3);">Yes! 💖</h2>
+    <p style="color:#dc2626;margin-bottom:40px;font-size:2rem;line-height:2.2;font-family:'Pacifico',cursive;font-weight:400;text-shadow:2px 2px 0 rgba(0,0,0,0.1);letter-spacing:1px;">Out of all the possibilities,<br/><br/>I'm glad this one is us.</p>
+    <button id="closeCelebration" style="padding:12px 24px;border-radius:3px;background:linear-gradient(180deg,#ef4444,#dc2626);color:white;border:4px solid #000;font-family:'Press Start 2P',system-ui;font-size:12px;cursor:pointer;box-shadow:6px 6px 0 rgba(0,0,0,0.4);transition:transform 100ms;font-weight:700;">Close</button>
+  </div>
+</div>
+<!-- Floating developer credit (not in header/footer) -->
+<div id="dev-badge" aria-hidden="false">
+  <img id="dev-logo" src="Aruosa Tech Icon.png" alt="Aruosa Tech logo" />
+  <span id="dev-text">Developed by Aruosa Tech</span>
+</div>
+
+<script src="valentine.js"></script>
+</body>
+</html>

@@ -1,0 +1,173 @@
+/* Pixelated Valentine's styles */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+:root{
+  --accent: #ef4444;
+  --accent-2: #f97316;
+  --text: #111827;
+  --card-bg: rgba(255,255,255,0.9);
+}
+
+html,body{
+  height:100%;
+}
+
+/* Target the body when Tailwind's gradient class is present to ensure our image overrides it */
+body.bg-gradient-to-b{
+  margin:0;
+  font-family: 'Press Start 2P', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  /* try several possible locations/names for the image so it loads whether you placed it in project root or in src */
+  background-image: url('../Background.jpg'), url('../heart-bg.png'), url('Background.jpg'), url('heart-bg.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: repeat;
+  image-rendering: pixelated;
+  color:var(--text);
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* If body doesn't have the Tailwind gradient class, still apply image (covers file:// testing cases) */
+body:not(.bg-gradient-to-b){
+  margin:0;
+  font-family: 'Press Start 2P', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  background-image: url('../Background.jpg'), url('../heart-bg.png'), url('Background.jpg'), url('heart-bg.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: repeat;
+  image-rendering: pixelated;
+  color:var(--text);
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Make main sections stand out with a card look */
+#prompt{
+  background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,240,245,0.88));
+  border:6px solid rgba(0,0,0,0.85);
+  box-shadow: 10px 10px 0 rgba(0,0,0,0.85);
+  padding:24px;
+  border-radius:4px;
+}
+
+/* Loading overlay (spinning heart) */
+#loader{
+  position:fixed;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  /* opaque background so page content stays hidden while loader plays */
+  background: #ffffff;
+  z-index:120;
+}
+
+#loader-heart{ width:120px; height:120px; filter: drop-shadow(6px 6px 0 rgba(0,0,0,0.6)); }
+
+@keyframes loader-spin{ to { transform: rotate(360deg); } }
+.spin{ animation: loader-spin 1200ms linear infinite; transform-origin:center; }
+
+/* Video loader sizing */
+#loader-video{ width:220px; height:auto; border:6px solid #000; border-radius:6px; box-shadow:8px 8px 0 rgba(0,0,0,0.6); background:#fff; display:block; }
+
+#loader-fallback{ display:none; }
+
+#loader.fade-out{ transition: opacity 420ms ease; opacity:0; pointer-events:none; }
+
+h1{
+  margin:0 0 8px 0;
+  color:var(--accent);
+  font-size:1.6rem;
+  line-height:1.05;
+  text-shadow: 3px 3px 0 rgba(0,0,0,0.6);
+}
+
+p{ font-size:0.7rem; }
+
+/* Buttons - bold, chunky, pixel style */
+#buttons button{
+  font-family: inherit;
+  font-weight:700;
+  letter-spacing:1px;
+  border:4px solid #000;
+  border-radius:3px;
+  padding:14px 20px;
+  cursor:pointer;
+  box-shadow: 6px 6px 0 #000;
+  transition: transform 120ms ease, box-shadow 120ms ease;
+}
+
+#yesBtn{
+  background: linear-gradient(180deg, var(--accent), var(--accent-2));
+  color: #fff;
+}
+
+#noBtn{
+  background: #fff3f4;
+  color: #1f2937;
+}
+
+#buttons button:active{
+  transform: translate(2px,2px);
+  box-shadow: 3px 3px 0 #000;
+}
+
+/* Make the no button sit above other content when fixed */
+#noBtn{ z-index:80; }
+
+/* Celebration overlay styling */
+#celebration > div{
+  font-family: inherit;
+  border:6px solid #000;
+  box-shadow: 12px 12px 0 rgba(0,0,0,0.5);
+}
+
+/* Responsive / mobile-first tweaks */
+@media (max-width: 640px){
+  h1{ font-size:1.15rem; }
+  #prompt{ padding:18px; margin: 12px; }
+  #buttons{ height:160px; }
+  #buttons button{ padding:12px 14px; font-size:0.7rem; }
+}
+
+@media (min-width: 641px){
+  h1{ font-size:2.2rem; }
+  #prompt{ padding:32px; }
+  #buttons button{ padding:16px 26px; font-size:0.85rem; }
+}
+
+/* Accessibility: ensure focus is visible */
+#yesBtn:focus, #noBtn:focus{ outline:4px solid rgba(255,255,255,0.6); outline-offset:2px; }
+
+/* When button becomes fixed we want it to keep pixelated edges */
+#noBtn[style*="position: fixed"]{ image-rendering: pixelated; }
+
+/* Developer credit badge - small and unobtrusive */
+#dev-badge{
+  position:fixed;
+  right:12px;
+  bottom:12px;
+  display:flex;
+  align-items:center;
+  gap:4px;
+  background: rgba(255,255,255,0.7);
+  padding:4px 6px;
+  border:2px solid rgba(0,0,0,0.4);
+  border-radius:3px;
+  font-size:9px;
+  z-index:90;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+  opacity:0.65;
+  transition:opacity 200ms ease;
+}
+
+#dev-badge:hover{ opacity:0.95; }
+
+#dev-badge img#dev-logo{ width:16px; height:auto; display:block; image-rendering:pixelated; }
+#dev-text{ color:#666; font-size:8px; font-weight:400; }
+
+@media (max-width:480px){
+  #dev-badge{ right:8px; bottom:8px; padding:3px 5px; gap:3px; font-size:7px; }
+  #dev-badge img#dev-logo{ width:12px; }
+  #dev-text{ font-size:7px; }
+}
